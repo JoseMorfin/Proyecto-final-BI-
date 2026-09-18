@@ -1,0 +1,193 @@
+marca,anio,origen,unidades
+General Motors,2025,Importado,112753
+General Motors,2025,Nacional,14768
+General Motors,2026,Importado,119191
+General Motors,2026,Nacional,10921
+Toyota,2025,Importado,73691
+Toyota,2025,Nacional,6795
+Toyota,2026,Importado,76933
+Toyota,2026,Nacional,7140
+Volkswagen,2025,Importado,46924
+Volkswagen,2025,Nacional,39571
+Volkswagen,2026,Importado,52149
+Volkswagen,2026,Nacional,36892
+BYD,2025,Importado,47202
+BYD,2025,Nacional,0
+BYD,2026,Importado,45296
+BYD,2026,Nacional,0
+Nissan,2025,Importado,27471
+Nissan,2025,Nacional,148097
+Nissan,2026,Importado,43278
+Nissan,2026,Nacional,129663
+Hyundai,2025,Importado,34311
+Hyundai,2025,Nacional,0
+Hyundai,2026,Importado,36107
+Hyundai,2026,Nacional,0
+MG Motor,2025,Importado,31872
+MG Motor,2025,Nacional,0
+MG Motor,2026,Importado,36019
+MG Motor,2026,Nacional,0
+Geely,2025,Importado,10515
+Geely,2025,Nacional,0
+Geely,2026,Importado,31606
+Geely,2026,Nacional,0
+Ford,2025,Importado,31254
+Ford,2025,Nacional,3575
+Ford,2026,Importado,31466
+Ford,2026,Nacional,2853
+Chrysler,2025,Importado,27992
+Chrysler,2025,Nacional,12609
+Chrysler,2026,Importado,27717
+Chrysler,2026,Nacional,23946
+KIA,2025,Importado,25198
+KIA,2025,Nacional,46647
+KIA,2026,Importado,25425
+KIA,2026,Nacional,47848
+Renault,2025,Importado,20129
+Renault,2025,Nacional,0
+Renault,2026,Importado,23789
+Renault,2026,Nacional,0
+Mazda,2025,Importado,17090
+Mazda,2025,Nacional,50549
+Mazda,2026,Importado,21213
+Mazda,2026,Nacional,48902
+Suzuki,2025,Importado,25834
+Suzuki,2025,Nacional,0
+Suzuki,2026,Importado,21098
+Suzuki,2026,Nacional,0
+Honda,2025,Importado,19258
+Honda,2025,Nacional,5634
+Honda,2026,Importado,20588
+Honda,2026,Nacional,5204
+Mitsubishi Motors,2025,Importado,18450
+Mitsubishi Motors,2025,Nacional,0
+Mitsubishi Motors,2026,Importado,19406
+Mitsubishi Motors,2026,Nacional,0
+SEAT,2025,Importado,13902
+SEAT,2025,Nacional,0
+SEAT,2026,Importado,14653
+SEAT,2026,Nacional,0
+Changan,2025,Importado,11015
+Changan,2025,Nacional,0
+Changan,2026,Importado,14418
+Changan,2026,Nacional,0
+Chirey,2025,Importado,9473
+Chirey,2025,Nacional,0
+Chirey,2026,Importado,12831
+Chirey,2026,Nacional,0
+Peugeot,2025,Importado,11701
+Peugeot,2025,Nacional,0
+Peugeot,2026,Importado,11780
+Peugeot,2026,Nacional,0
+BMW,2025,Importado,9759
+BMW,2025,Nacional,0
+BMW,2026,Importado,9390
+BMW,2026,Nacional,0
+Great Wall Motor,2025,Importado,9685
+Great Wall Motor,2025,Nacional,0
+Great Wall Motor,2026,Importado,8830
+Great Wall Motor,2026,Nacional,0
+Mercedes Benz,2025,Importado,6743
+Mercedes Benz,2025,Nacional,368
+Mercedes Benz,2026,Importado,5433
+Mercedes Benz,2026,Nacional,497
+GAC,2025,Importado,4829
+GAC,2025,Nacional,0
+GAC,2026,Importado,4939
+GAC,2026,Nacional,0
+Omoda,2025,Importado,4248
+Omoda,2025,Nacional,0
+Omoda,2026,Importado,4830
+Omoda,2026,Nacional,0
+Audi,2025,Importado,4880
+Audi,2025,Nacional,909
+Audi,2026,Importado,4568
+Audi,2026,Nacional,1405
+Jetour Soueast,2025,Importado,1060
+Jetour Soueast,2025,Nacional,0
+Jetour Soueast,2026,Importado,4116
+Jetour Soueast,2026,Nacional,0
+Subaru,2025,Importado,2686
+Subaru,2025,Nacional,0
+Subaru,2026,Importado,3098
+Subaru,2026,Nacional,0
+Volvo,2025,Importado,4179
+Volvo,2025,Nacional,0
+Volvo,2026,Importado,2334
+Volvo,2026,Nacional,0
+Porsche,2025,Importado,2225
+Porsche,2025,Nacional,0
+Porsche,2026,Importado,2200
+Porsche,2026,Nacional,0
+Mini,2025,Importado,2607
+Mini,2025,Nacional,0
+Mini,2026,Importado,2170
+Mini,2026,Nacional,0
+Fiat,2025,Importado,3490
+Fiat,2025,Nacional,0
+Fiat,2026,Importado,2157
+Fiat,2026,Nacional,0
+Lexus,2025,Importado,1755
+Lexus,2025,Nacional,0
+Lexus,2026,Importado,1900
+Lexus,2026,Nacional,0
+Isuzu,2025,Importado,1674
+Isuzu,2025,Nacional,0
+Isuzu,2026,Importado,1537
+Isuzu,2026,Nacional,0
+Lynk&Co,2025,Importado,0
+Lynk&Co,2025,Nacional,0
+Lynk&Co,2026,Importado,1327
+Lynk&Co,2026,Nacional,0
+Land Rover,2025,Importado,1377
+Land Rover,2025,Nacional,0
+Land Rover,2026,Importado,1262
+Land Rover,2026,Nacional,0
+Zeekr,2025,Importado,0
+Zeekr,2025,Nacional,0
+Zeekr,2026,Importado,1250
+Zeekr,2026,Nacional,0
+Foton,2025,Importado,1604
+Foton,2025,Nacional,0
+Foton,2026,Importado,1233
+Foton,2026,Nacional,0
+Lincoln,2025,Importado,1382
+Lincoln,2025,Nacional,0
+Lincoln,2026,Importado,1228
+Lincoln,2026,Nacional,0
+Leapmotor,2025,Importado,0
+Leapmotor,2025,Nacional,0
+Leapmotor,2026,Importado,1116
+Leapmotor,2026,Nacional,0
+Infiniti,2025,Importado,461
+Infiniti,2025,Nacional,301
+Infiniti,2026,Importado,614
+Infiniti,2026,Nacional,203
+MOTORNATION,2025,Importado,2153
+MOTORNATION,2025,Nacional,0
+MOTORNATION,2026,Importado,443
+MOTORNATION,2026,Nacional,0
+Alfa Romeo,2025,Importado,171
+Alfa Romeo,2025,Nacional,0
+Alfa Romeo,2026,Importado,355
+Alfa Romeo,2026,Nacional,0
+Acura,2025,Importado,385
+Acura,2025,Nacional,109
+Acura,2026,Importado,248
+Acura,2026,Nacional,200
+Auteco,2025,Importado,33
+Auteco,2025,Nacional,0
+Auteco,2026,Importado,17
+Auteco,2026,Nacional,0
+Bentley,2025,Importado,9
+Bentley,2025,Nacional,0
+Bentley,2026,Importado,8
+Bentley,2026,Nacional,0
+Jaguar,2025,Importado,5
+Jaguar,2025,Nacional,0
+Jaguar,2026,Importado,0
+Jaguar,2026,Nacional,0
+JAC,2025,Importado,0
+JAC,2025,Nacional,16211
+JAC,2026,Importado,0
+JAC,2026,Nacional,15371
