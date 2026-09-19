@@ -4,5 +4,5 @@ pandas
 numpy
 matplotlib
 seaborn
-statsbombpy
-mplsoccer
+statsbompy
+geopandas
