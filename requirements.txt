@@ -3,5 +3,7 @@ pandas
 numpy
 matplotlib
 seaborn
-scipy
 geopandas
+scipy
+requests
+pyogrio
