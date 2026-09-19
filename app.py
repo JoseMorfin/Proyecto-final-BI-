@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import geopandas as gpd
 from scipy.optimize import curve_fit
 
 st.set_page_config(layout="wide")
