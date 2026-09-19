@@ -1,8 +1,5 @@
-
 streamlit
 pandas
 numpy
-matplotlib
-seaborn
-statsbompy
-geopandas
+plotly
+scikit-learn
