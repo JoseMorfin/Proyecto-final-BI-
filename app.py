@@ -1888,5 +1888,90 @@ elif option == "Análisis complementario":
         "estados, no entre personas."
     )
 
+
+    # --------------------------------------------------------
+    # CONCLUSIÓN DE INVERSIÓN
+    # --------------------------------------------------------
+
+    st.subheader(
+        "Conclusión de inversión: dónde, cómo y en qué orden"
+    )
+
+    # Capas de la cartera, con lo que ya se calculó arriba
+    jm_capa1 = ["Ciudad de México", "México", "Nuevo León", "Jalisco", "Sinaloa"]
+    jm_capa2 = ["Guanajuato", "Puebla", "Veracruz de Ignacio de la Llave",
+                "Coahuila de Zaragoza", "Yucatán", "Chihuahua",
+                "Baja California", "Michoacán de Ocampo", "Sonora",
+                "San Luis Potosí"]
+
+    jm_2026["capa"] = np.where(jm_2026["entidad"].isin(jm_capa1), "1. Eléctrico y enchufable",
+                      np.where(jm_2026["entidad"].isin(jm_capa2), "2. Híbrido convencional",
+                               "3. Todavía no"))
+
+    # Cuántas agencias faltarían para llegar al promedio nacional de ventas por agencia
+    jm_2026["agencias_faltantes"] = jm_2026["ventas_totales"] / jm_vpa_nal - jm_2026["agencias"]
+
+    jm_resumen_capas = (
+        jm_2026
+        .groupby("capa")
+        .agg(estados=("entidad", "count"),
+             electrificados=("total_hye", "sum"),
+             penetracion=("penetracion", "mean"),
+             se_enchufa=("enchufa", "mean"))
+        .round(1)
+    )
+    jm_resumen_capas["% del mercado"] = (
+        jm_resumen_capas["electrificados"] / jm_2026["total_hye"].sum() * 100
+    ).round(1)
+
+    st.dataframe(jm_resumen_capas)
+
+    st.write(
+        f"**Dónde.** Los {len(jm_capa1) + len(jm_capa2)} estados de las dos "
+        "primeras capas son el "
+        f"{jm_2026[jm_2026['capa'] != '3. Todavía no']['total_hye'].sum() / jm_2026['total_hye'].sum() * 100:.0f} % "
+        "del mercado electrificado del país. En la primera capa el producto es "
+        "eléctrico puro y enchufable, porque ahí ya se enchufa más que en el "
+        "promedio nacional; en la segunda, híbrido convencional, que es donde "
+        "está el volumen y no hace falta cable."
+    )
+
+    jm_cobertura = jm_2026[jm_2026["agencias_faltantes"] > 0][
+        ["entidad", "agencias", "ventas_por_agencia", "agencias_faltantes",
+         "cambio_pen"]
+    ].sort_values("agencias_faltantes", ascending=False).round(1)
+
+    st.write(
+        f"**Cómo.** El cuello de botella en los mercados grandes es cobertura, "
+        f"no demanda: el promedio nacional es de {jm_vpa_nal:.0f} autos por "
+        "agencia al año, y estos estados venden más que eso por punto de "
+        "venta. La última columna es cuántas agencias faltarían para igualar "
+        "el promedio:"
+    )
+
+    st.dataframe(jm_cobertura)
+
+    jm_nl = jm_2026[jm_2026["entidad"] == "Nuevo León"].iloc[0]
+    jm_sin_tesla_nal = jm_2026["sin_tesla_por_mil"].median()
+
+    st.write(
+        f"**Y la carga va junto con el producto.** Nuevo León está en la "
+        f"primera capa pero tiene {jm_nl['sin_tesla_por_mil']:.1f} cargadores "
+        "no-Tesla por cada mil autos nuevos, por debajo de la mediana nacional "
+        f"({jm_sin_tesla_nal:.1f}). Quien lleve eléctricos a Monterrey tiene "
+        "que llevar dónde cargarlos, o vender enchufable. Sinaloa es el caso "
+        "contrario: la participación eléctrica más alta del país con agencias "
+        "por debajo del promedio, así que ahí la oportunidad es de producto, "
+        "no de cobertura."
+    )
+
+    st.write(
+        "**Cuándo reevaluar.** Tres señales cambian esta recomendación: que el "
+        "eléctrico puro vuelva a crecer dos años seguidos, que BYD empiece a "
+        "reportar ventas por estado, y el cierre real de 2026 contra el piso "
+        f"estimado de {jm_cierre:,.0f} unidades."
+    )
+
+
     # Cerramos las figuras para que no se acumulen en memoria
     plt.close("all")
