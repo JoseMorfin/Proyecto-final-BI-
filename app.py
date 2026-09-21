@@ -1965,11 +1965,37 @@ elif option == "Análisis complementario":
         "no de cobertura."
     )
 
+    jm_izq, jm_der = st.columns(2)
+
+    with jm_izq:
+        st.markdown("**Si el dinero lo pone un distribuidor**")
+        st.write(
+            "Eléctrico y enchufable en la primera capa; híbrido convencional en "
+            "la segunda. La inversión que va primero es cobertura: en los "
+            "mercados grandes cada agencia ya vende por encima del promedio "
+            "nacional, así que el cuello de botella no es la demanda sino dónde "
+            "comprarlos. En Nuevo León la carga es parte del costo de entrada; "
+            "en Sinaloa falta producto, no puntos de venta."
+        )
+
+    with jm_der:
+        st.markdown("**Si el dinero lo pone una financiera**")
+        st.write(
+            "El crédito conviene donde la penetración crece más rápido "
+            "(Querétaro, Jalisco, Sinaloa y Nuevo León, todos por arriba del "
+            f"{jm_cambio_nal:.1f} nacional). El híbrido es el producto de menor "
+            "riesgo porque no depende de la red; el eléctrico puro cayó 13.9 % "
+            "en 2025, así que donde la carga es baja conviene plazo más corto o "
+            "enganche mayor. Financiar cargadores es un negocio aparte en los "
+            "estados con demanda y poca red."
+        )
+
     st.write(
-        "**Cuándo reevaluar.** Tres señales cambian esta recomendación: que el "
-        "eléctrico puro vuelva a crecer dos años seguidos, que BYD empiece a "
-        "reportar ventas por estado, y el cierre real de 2026 contra el piso "
-        f"estimado de {jm_cierre:,.0f} unidades."
+        "**Cuándo reevaluar, para los dos.** Tres señales cambian esta "
+        "recomendación: que el eléctrico puro vuelva a crecer dos años "
+        "seguidos, que BYD empiece a reportar ventas por estado —vendió 45,296 "
+        "unidades en 2026 sin aparecer en el registro—, y el cierre real de "
+        f"2026 contra el piso estimado de {jm_cierre:,.0f} unidades."
     )
 
 
