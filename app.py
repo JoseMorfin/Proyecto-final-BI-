@@ -547,8 +547,82 @@ elif option == "Visualizaciones":
 elif option == "Modelos Predictivos":
 
     st.header(
-        "Modelos Predictivos: Regresión Logística"
+        "Modelos Predictivos"
     )
+
+    # --------------------------------------------------------
+    # MODELO DE REGRESIÓN LINEAL
+    # --------------------------------------------------------
+
+    st.subheader(
+        "Modelo de Regresión Lineal"
+    )
+
+    st.write(
+        "Se comienza con una regresión lineal para entender de forma simple "
+        "la tendencia general de la venta de híbridos y eléctricos."
+    )
+
+    jm_anual = (
+        data
+        .groupby("AÑO")[["HIBRIDOS", "ELECTRICOS"]]
+        .sum()
+        .reset_index()
+    )
+
+    jm_x = jm_anual["AÑO"].values.astype(float)
+
+    for jm_tipo, jm_etiqueta in [("HIBRIDOS", "híbridos"),
+                                 ("ELECTRICOS", "eléctricos")]:
+
+        jm_y = jm_anual[jm_tipo].values.astype(float)
+
+        # Ajuste de la recta y su R²
+        jm_m, jm_b = np.polyfit(jm_x, jm_y, 1)
+        jm_recta = jm_m * jm_x + jm_b
+        jm_r2 = 1 - ((jm_y - jm_recta) ** 2).sum() / ((jm_y - jm_y.mean()) ** 2).sum()
+
+        jm_fig, jm_ax = plt.subplots(
+            figsize=(10, 5)
+        )
+
+        jm_ax.scatter(
+            jm_x,
+            jm_y,
+            color="#1f3a5f",
+            s=100,
+            label="Datos reales",
+            zorder=3
+        )
+
+        jm_ax.plot(
+            jm_x,
+            jm_recta,
+            color="red",
+            linewidth=2,
+            label="Modelo lineal"
+        )
+
+        jm_ax.set_xlabel("Año")
+        jm_ax.set_ylabel(f"Unidades {jm_etiqueta} vendidas")
+
+        jm_ax.set_title(
+            f"Venta de {jm_etiqueta} de 2020 a 2026"
+        )
+
+        jm_ax.legend()
+
+        st.pyplot(jm_fig)
+
+        st.write(f"R2 score del modelo lineal ({jm_etiqueta}): {jm_r2:.4f}")
+
+    st.write(
+        "El modelo lineal puede ser viable, pero hay que tomarlo con cautela: "
+        "son tecnologías todavía en adopción y pueden desacelerarse. Por eso "
+        "abajo se prueba la curva logística, con su forma de S: adopción "
+        "lenta, aceleración y saturación."
+    )
+
 
 
     # --------------------------------------------------------
@@ -768,6 +842,129 @@ elif option == "Modelos Predictivos":
     st.write(
         f"Punto de inflexión (x0): año "
         f"{x0_e + resumen_anual_electricos['AÑO'].min():.1f}"
+    )
+
+
+
+    # --------------------------------------------------------
+    # PRUEBA: MODELO CON LA SERIE MENSUAL
+    # --------------------------------------------------------
+
+    st.subheader(
+        "Prueba: regresión lineal con la serie mensual"
+    )
+
+    st.write(
+        "Los modelos de arriba se ajustan sobre siete puntos anuales. Esta "
+        "prueba usa la serie mensual —80 puntos— con el mes y el año como "
+        "variables, que es el camino para poder pronosticar."
+    )
+
+    jm_meses_num = {"Enero": 1, "Febrero": 2, "Marzo": 3, "Abril": 4,
+                    "Mayo": 5, "Junio": 6, "Julio": 7, "Agosto": 8,
+                    "Septiembre": 9, "Octubre": 10, "Noviembre": 11,
+                    "Diciembre": 12}
+
+    jm_mensual = (
+        data
+        .groupby(["MES", "AÑO"])[["HIBRIDOS", "ELECTRICOS"]]
+        .sum()
+        .reset_index()
+    )
+
+    jm_mensual["MES_NUM"] = jm_mensual["MES"].map(jm_meses_num)
+    jm_mensual = jm_mensual.sort_values(["AÑO", "MES_NUM"]).reset_index(drop=True)
+
+    # Mínimos cuadrados con mes, año y ordenada al origen
+    jm_matriz = np.column_stack([
+        jm_mensual["MES_NUM"].values.astype(float),
+        jm_mensual["AÑO"].values.astype(float),
+        np.ones(len(jm_mensual))
+    ])
+
+    jm_obj = jm_mensual["HIBRIDOS"].values.astype(float)
+    jm_coef = np.linalg.lstsq(jm_matriz, jm_obj, rcond=None)[0]
+    jm_estimado = jm_matriz @ jm_coef
+    jm_r2_mes = 1 - ((jm_obj - jm_estimado) ** 2).sum() / ((jm_obj - jm_obj.mean()) ** 2).sum()
+
+    jm_mensual["ESTIMADO"] = jm_estimado
+    jm_mensual["MES_ANIO"] = (jm_mensual["MES"] + " " +
+                              jm_mensual["AÑO"].astype(str))
+
+    jm_fig_mes, jm_ax_mes = plt.subplots(
+        figsize=(15, 6)
+    )
+
+    jm_ax_mes.plot(
+        range(len(jm_mensual)),
+        jm_mensual["HIBRIDOS"],
+        color="#1f3a5f",
+        marker="o",
+        markersize=3,
+        linewidth=1,
+        label="Datos reales"
+    )
+
+    jm_ax_mes.plot(
+        range(len(jm_mensual)),
+        jm_mensual["ESTIMADO"],
+        color="red",
+        linestyle="--",
+        linewidth=2,
+        label="Modelo lineal mensual"
+    )
+
+    jm_paso = range(0, len(jm_mensual), 6)
+    jm_ax_mes.set_xticks(list(jm_paso))
+    jm_ax_mes.set_xticklabels(jm_mensual["MES_ANIO"].iloc[list(jm_paso)],
+                              rotation=90)
+
+    jm_ax_mes.set_title(
+        "Predicción de ventas de híbridos por mes y año (modelo lineal)"
+    )
+
+    jm_ax_mes.set_ylabel("Unidades híbridas vendidas")
+    jm_ax_mes.legend()
+    jm_ax_mes.grid(True, linestyle="--", alpha=0.7)
+
+    st.pyplot(jm_fig_mes)
+
+    st.write(
+        f"R2 score del modelo mensual: {jm_r2_mes:.4f}, sobre "
+        f"{len(jm_mensual)} puntos. El mes y el año, por sí solos, no "
+        "capturan la estacionalidad de fin de año: los picos de diciembre se "
+        "quedan cortos."
+    )
+
+
+    # --------------------------------------------------------
+    # CONCLUSIONES DE LOS MODELOS
+    # --------------------------------------------------------
+
+    st.subheader(
+        "Conclusiones"
+    )
+
+    st.write(
+        "En los modelos presentados, tanto regresión lineal como logística, "
+        "se ve un crecimiento claro del mercado de los automóviles que no "
+        "dependen de combustibles fósiles. Por lo mismo es valioso invertir "
+        "en la venta de autos híbridos en México."
+    )
+
+    st.write(
+        "Sin embargo, el modelo logístico de los eléctricos pone el techo del "
+        "mercado en 21,528 unidades, por debajo de las 24,290 que ya se "
+        "vendieron en 2024: con siete puntos anuales y tres parámetros, ese "
+        "techo queda indeterminado y no se puede concluir si es una inversión "
+        "segura con los datos que se tienen."
+    )
+
+    st.write(
+        "Los estados donde la venta de híbridos va al alza son los más "
+        "relevantes para invertir: Ciudad de México, Estado de México, Nuevo "
+        "León y Jalisco. El detalle, estado por estado, está en la sección "
+        "Análisis complementario."
     )
 
 
